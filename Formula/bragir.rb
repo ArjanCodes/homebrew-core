@@ -7,6 +7,7 @@ class Bragir < Formula
   sha256 "28456dcc019b5bfb5dec48826cb1ece8fa6c94b8915c9311a0733330c58c0b09"
   license "MIT"
 
+  depends_on "rust" => :build
   depends_on "ffmpeg"
   depends_on "python@3.12"
 
@@ -100,15 +101,27 @@ class Bragir < Formula
   end
 
   test do
-    # `test do` will create, run in and delete a temporary directory.
-    #
-    # This test will fail and we won't accept that! For Homebrew/homebrew-core
-    # this will need to be a test that verifies the functionality of the
-    # software. Run the test with `brew test bragir`. Options passed
-    # to `brew install` such as `--HEAD` also need to be provided to `brew test`.
-    #
-    # The installed folder is not in the path, so use the entire path to any
-    # executables being tested: `system bin/"program", "do", "something"`.
+    config_dir = Pathname.new(Dir.home) / ".bragir/cli"
+    config_dir.mkpath
+    config_file = config_dir / "config.ini"
+
+    unless config_file.exist?
+      config_file.write <<~EOS
+        [audio]
+        min_silence_len=1000
+        silence_thresh=-40
+        keep_silence=True
+
+        [logging]
+        level=info
+
+        [client]
+        openai_api_key=YOUR_API_KEY
+      EOS
+    end
+
+    # Base options exists
     system bin/"bragir", "--version"
+    system bin/"bragir", "--help"
   end
 end
