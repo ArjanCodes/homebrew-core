@@ -100,6 +100,41 @@ class Bragir < Formula
     virtualenv_install_with_resources
   end
 
+  def post_install
+    begin
+      config_dir = Pathname.new("#{HOMEBREW_PREFIX}/etc/bragir")
+      
+      config_dir.mkpath
+      
+      config_file = config_dir / "config.ini"
+      
+      if config_file.exist?
+        puts "Warning: The configuration file already exists at #{config_file}. Please remove it if you want to recreate it."
+      else
+        content = <<~CONFIG
+        [audio]
+        min_silence_len=1000
+        silence_thresh=-40
+        keep_silence=True
+        
+        [logging]
+        level=info
+        
+        [client]
+        openai_api_key=YOUR_API_KEY
+        CONFIG
+
+        config_file.write(content)
+        puts "Configuration file created at #{config_file}"
+      end
+
+    rescue => e
+      puts "Error encountered: #{e.message}"
+      puts e.backtrace.join("\n")
+    end
+  end
+
+
   test do
     config_dir = Pathname.new(Dir.home) / ".bragir/cli"
     config_dir.mkpath
