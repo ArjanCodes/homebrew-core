@@ -3,7 +3,7 @@ class Bragir < Formula
 
   desc "CLI tool for translation and transcription of Video and Audio"
   homepage "https://arjancodes.com"
-  url "https://github.com/ArjanCodes/bragir/archive/refs/tags/v1.2.2-release.tar.gz"
+  url "https://github.com/ArjanCodes/bragir/releases/download/v1.2.3-release/bragir-1.2.3.tar.gz"
   sha256 "28456dcc019b5bfb5dec48826cb1ece8fa6c94b8915c9311a0733330c58c0b09"
   license "MIT"
 
