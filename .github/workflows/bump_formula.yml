@@ -17,10 +17,6 @@ on:
         description: "URL of the formula"
         required: true
         type: string
-      sha256:
-        description: "SHA256 of the formula"
-        required: true
-        type: string
 
 env:
   OWNER: ArjanCodes
@@ -51,4 +47,3 @@ jobs:
           FORMULA_VERSION: ${{ github.event_name == 'repository_dispatch' && github.event.client_payload.formula_version || inputs.formula_version}}
           FORMULA_NAME: ${{ github.event_name == 'repository_dispatch' && github.event.client_payload.formula_name || inputs.formula_name}}
           FORMULA_URL: ${{ github.event_name == 'repository_dispatch' && github.event.client_payload.formula_url || inputs.formula_url}}
-          SHA256: ${{ github.event_name == 'repository_dispatch' && github.event.client_payload.sha256 || inputs.sha256}}
