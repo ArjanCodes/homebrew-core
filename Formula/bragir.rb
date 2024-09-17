@@ -3,8 +3,8 @@ class Bragir < Formula
 
   desc "CLI tool for translation and transcription of Video and Audio"
   homepage "https://arjancodes.com"
-  url "https://github.com/ArjanCodes/bragir/releases/download/1.2.5/bragir-1.2.5.tar.gz"
-  sha256 "59249cdabab2ccfb183c6842b2ee8a73c514193e8fae60c56abedabe5aebfd58"
+  url "https://github.com/ArjanCodes/bragir/releases/download/1.2.16/bragir-1.2.16.tar.gz"
+  sha256 "159d9e639335d378054dfdb2b18f61ef9aa33970c4c5d1d8b19fcddbf6ab838f"
   license "MIT"
 
   depends_on "rust" => :build
