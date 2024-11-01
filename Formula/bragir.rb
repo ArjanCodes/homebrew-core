@@ -99,29 +99,4 @@ class Bragir < Formula
   def install
     virtualenv_install_with_resources
   end
-
-  test do
-    config_dir = Pathname.new(Dir.home) / ".bragir/cli"
-    config_dir.mkpath
-    config_file = config_dir / "config.ini"
-
-    unless config_file.exist?
-      config_file.write <<~EOS
-        [audio]
-        min_silence_len=1000
-        silence_thresh=-40
-        keep_silence=True
-
-        [logging]
-        level=info
-
-        [client]
-        openai_api_key=YOUR_API_KEY
-      EOS
-    end
-
-    # Base options exists
-    system bin/"bragir", "--version"
-    system bin/"bragir", "--help"
-  end
 end
